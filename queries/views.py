@@ -3,7 +3,6 @@ import requests
 from rest_framework.decorators import api_view, parser_classes
 from django.conf import settings
 from rest_framework.response import Response
-from .serializers import MathQuerySerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 
