@@ -17,4 +17,4 @@ def solve_question(request):
     headers = {'Content-Type': 'application/xml'}
     parameters = {'appid' : settings.WOLFRAM_API_KEY, 'podstate': 'Step-by-step solution', 'input': math_query}
     response = requests.get(url, params=parameters, headers=headers)
-    return Response(response.content, status=status.HTTP_201_CREATED)
+    return Response(response.content, status=status.HTTP_200_OK)
