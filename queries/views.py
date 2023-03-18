@@ -6,20 +6,15 @@ from rest_framework.response import Response
 from .serializers import MathQuerySerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-import xml.etree.ElementTree as ET
-import xmltodict
-import json
 
 # Create your views here.
 
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
 @parser_classes([JSONParser])
 def solve_question(request):
     math_query=request.query_params.get('math_query')
-    if request.method == 'GET':
-        url = 'http://api.wolframalpha.com/v2/query'
-        headers = {'Content-Type': 'application/xml'}
-        parameters = {'appid' : settings.WOLFRAM_API_KEY, 'podstate': 'Step-by-step solution', 'input': math_query}
-        response = requests.get(url, params=parameters, headers=headers)
-        return Response(response.content, status=status.HTTP_201_CREATED)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+    url = 'http://api.wolframalpha.com/v2/query'
+    headers = {'Content-Type': 'application/xml'}
+    parameters = {'appid' : settings.WOLFRAM_API_KEY, 'podstate': 'Step-by-step solution', 'input': math_query}
+    response = requests.get(url, params=parameters, headers=headers)
+    return Response(response.content, status=status.HTTP_201_CREATED)
